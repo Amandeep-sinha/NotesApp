@@ -1,18 +1,20 @@
 import { ColorPalette, Filter, Header, NoteCard, Sidebar,EditNoteCard } from "../../components";
 import { useNotes } from "../../context";
+import { FinalFilteredSortedItem } from "../../../utils/getFinalFilteredSortedItem";
 import "./Archive.css"
 const Archive = () =>{
-    const {notesState:{archiveList,editNote,isEditing}} =useNotes()
+    const {notesState:{archiveList,editNote,isEditing},togglesidebar} =useNotes()
+    const FinalArchiveList=FinalFilteredSortedItem(archiveList)
     return (
         <div class="home__wrapper">
             {isEditing&&<EditNoteCard editNote={editNote}/>}
         <Header />
         <Filter/>
         <div className="main__wrapper">
-          <Sidebar />
+          {togglesidebar ?<Sidebar />:null}
           <div className="trash__wrapper">
-          {archiveList?.length === 0 && <p className="empty__lables">No Archives added!</p>}
-              {archiveList?.map((note)=>
+          {FinalArchiveList?.length === 0 && <p className="empty__lables">No Archives added!</p>}
+              {FinalArchiveList?.map((note)=>
               <NoteCard key={note._id} note={note}/>)}
 
 

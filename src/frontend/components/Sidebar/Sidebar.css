@@ -1,6 +1,7 @@
 .sidebar {
-    width: 12rem;
+    min-width: 14rem;
     background-color: var(--bg2-color);
+    position:fixed;
     height: 90vh;
     margin-top: 2px;
     display: flex;
@@ -34,7 +35,7 @@
   }
   .user_account {
     display: flex;
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
   .user_account > * {
     padding: 0 0.5rem;

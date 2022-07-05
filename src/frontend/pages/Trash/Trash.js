@@ -10,12 +10,14 @@ const Trash = () =>{
               <Filter/>
               <div className="main__wrapper">
                 <Sidebar />
-                <div className="trash__wrapper">
-                    {notesState.trashList?.map((note)=>
-                    <TrashCard key={note._id} note={note}/>)}
-
-
-              </div>
+                <div className=" trash__wrapper">
+          {notesState.trashList?.map((note) => (
+            <TrashCard key={note._id} note={note} />
+          ))}
+          {notesState.trashList?.length === 0 && (
+            <p className="empty__lables">No Trash added!</p>
+          )}
+        </div>
 
             </div>
             </div>

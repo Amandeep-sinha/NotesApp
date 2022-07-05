@@ -88,7 +88,7 @@ return (
           <div className="auth__box-sub">
             <h4 className="sub__main" onClick={(e)=>submitLoginForm(e,loginform.email,loginform.password)}>LOGIN</h4>
           </div>
-          <button className="sub__main2 sub__main3 Link_style"  onClick={(e)=>setLoginForm({...loginform,email:"adarshbalika@gmail.com",password:"a1234"})}>
+          <button className="sub__main2 sub__main3 Link_style"  onClick={(e)=>setLoginForm({...loginform,email:"mramandeepsinha@gmail.com",password:"Abc@123"})}>
             Login With test Credentials
 
           </button>

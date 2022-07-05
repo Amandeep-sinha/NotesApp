@@ -18,7 +18,7 @@ const LandingPage = () => {
           One stop solution for your daily notes, routines, tasks, Time Tables etc. Give it a try to optimise your efficiency. 
         </h3>
 
-        <button class="btn btn_solid-primary btn_primary" onClick={()=>navigate("/signup")} >{auth.token ?"Go to Notes":"Join Now"}</button>
+        <button class="btn btn_solid-primary btn_primary" onClick={()=>navigate(auth.token?"/home":"/signup")} >{auth.token ?"Go to Notes":"Join Now"}</button>
         <div class="lp__desp-account " onClick={()=>navigate("/login")}>Already have an account ?</div>
       </div>
       

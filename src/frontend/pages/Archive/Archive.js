@@ -1,10 +1,11 @@
-import { ColorPalette, Filter, Header, NoteCard, Sidebar } from "../../components";
+import { ColorPalette, Filter, Header, NoteCard, Sidebar,EditNoteCard } from "../../components";
 import { useNotes } from "../../context";
 import "./Archive.css"
 const Archive = () =>{
-    const {notesState:{archiveList}} =useNotes()
+    const {notesState:{archiveList,editNote,isEditing}} =useNotes()
     return (
         <div class="home__wrapper">
+            {isEditing&&<EditNoteCard editNote={editNote}/>}
         <Header />
         <Filter/>
         <div className="main__wrapper">

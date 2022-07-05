@@ -1,24 +1,27 @@
+import { useState } from "react";
+import { useNotes } from "../../context";
 import "./ColorPalette.css";
-const ColorPalette = () => {
+const ColorPalette = ({changeColor}) => {
   const bgColorList = [
     "#CCFF90",
     "#FDCFE8",
     "#D7AEFB",
     "#E6C9A8",
     "#BAF0BF",
-    "#F28B82",
+    "#F5F5F5",
   ];
   return (
     <div className="color__palette">
 
-      {bgColorList.map((color) => {
+      {bgColorList.map((color,index) => {
         return (
-          <button
+          <button  key={index}
             className="color__palette-btn"
             style={{
               backgroundColor: color,
             }}
             type="button"
+            onClick={(e)=>changeColor(e,color)}
           ></button>
         );
       })}

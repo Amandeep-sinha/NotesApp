@@ -40,7 +40,7 @@ const NoteCard = ({ note }) => {
         editNoteHandler(e, { ...note, bgColor: color });
       }
     
-    console.log(existInArchive);
+      console.log(notesState.isEditing);
   return (
     <div
       style={{ backgroundColor: note.bgColor }}
@@ -68,6 +68,7 @@ const NoteCard = ({ note }) => {
         className="note__desp"
         dangerouslySetInnerHTML={{ __html: note.note }}
       ></div>
+      {note.tags.length > 0 && <div className="note__tag">{note.tags}</div>}
       <div className="notecard__desp2">
       <div>{note.createdAt}</div>
         <div className="notescard__btns">
@@ -80,7 +81,6 @@ const NoteCard = ({ note }) => {
           >
             palette
           </span>
-          <span class="material-icons-outlined">label</span>
           <span
             class="material-icons-outlined"
             onClick={(e) => {

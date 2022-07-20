@@ -1,6 +1,6 @@
 .main__wrapper{
     display: flex;
-
+    background-color: white;
     width:100vw;
 }
 .home__wrapper{
@@ -10,7 +10,6 @@
     width:100%;
     flex-direction: column;
     position: relative;
-    /* background-color: pink; */
 
 }
 .notes__editor{
@@ -20,7 +19,8 @@
     text-align: center;
     border:1px solid black;
     position: relative;
-    margin-bottom:5rem;;
+    margin-bottom:5rem;
+    border-radius: 0.3rem;
 }
 .notes__editor-title{
     width:100%;
@@ -34,7 +34,6 @@
     align-items: center;
     width:100%;
     height:2rem;
-    /* background-color: green; */
 }
 .btn_sec{
     padding:0.2rem 1rem;
@@ -60,4 +59,9 @@
     justify-content: center;
     grid-gap: 1rem;
     gap: 1rem;
+} 
+.pinned__list{
+    width:100%;
+    text-align: center;
+    height:1.5rem;
 } 

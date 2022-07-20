@@ -1,13 +1,14 @@
 .sidebar {
-    min-width: 14rem;
+    min-width: 12rem;
     background-color: var(--bg2-color);
+    opacity: 80%;
     position:fixed;
     height: 90vh;
     margin-top: 2px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  
+    z-index: 6;
     padding: 2rem 0;
   }
   .sidebar__active {
@@ -22,9 +23,10 @@
     display: flex;
     align-items: center;
     margin-bottom: 0.7rem;
+    background-color: var(--bg-color);
   }
   .sidebar__btn:hover {
-    background-color: var(--bg-color);
+    background-color: var(--bg2-color);
   }
   .active {
     background-color: var(--primary-color);
@@ -35,7 +37,7 @@
   }
   .user_account {
     display: flex;
-    padding: 0 1rem;
+    padding: 0 1rem 3rem 1rem;
   }
   .user_account > * {
     padding: 0 0.5rem;

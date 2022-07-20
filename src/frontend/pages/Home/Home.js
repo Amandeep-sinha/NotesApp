@@ -1,28 +1,35 @@
 import "./Home.css"
 import { useState,useEffect,useRef } from "react";
 import dayjs from "dayjs";
-import { ColorPalette, Filter, Header, NoteCard, Sidebar,EditNoteCard, } from "../../components";
+import { ColorPalette, Filter, Header, NoteCard, Sidebar,EditNoteCard,PriorityPalette, } from "../../components";
 import { RichTextEditor } from "../../components/RichTextEditor/RichTextEditor";
 import { useNotes } from "../../context";
+import { FinalFilteredSortedItem } from "../../../utils/getFinalFilteredSortedItem";
 const Home = () =>{
-    const { addnewnoteHandler, notesState } = useNotes();
+    const { addnewnoteHandler, notesState, togglesidebar } = useNotes();
   const noteInputRef = useRef(null);
   const [toggleColorPallete, setToggleColorPallette] = useState(false);
   const [toggleLabelInput,setToggleLabelInput]=useState(false);
+  const [togglePriorityPallete, setTogglePriorityPallette] = useState(false);
   const formatDate = () => dayjs().format("DD/MM/YY hh:mm:ss a");
   const[userData,setUserData]=useState({
     title:"",
     note:"<p><br></p>",
     tags:[],
+    priority:{Medium:'2'},
   })
   const submitFormHandler = (e) =>{
     e.preventDefault();
     addnewnoteHandler({...userData,createdAt: formatDate()});
-    setUserData((data) => ({ ...data, title: "", note: "<p><br></p>" }));
+    setUserData((data) => ({ ...data, title: "", note: "<p><br></p>",tags: [],
+    priority:[], }));
     setToggleLabelInput(false)
+    setTogglePriorityPallette(false);
+    setToggleColorPallette(false)
   };
-  const PinnedList = notesState.notesList?.filter((item) => item.isPinned);
-  const UnPinnedList = notesState.notesList?.filter((item) => !item.isPinned);
+  const FinalNotesList = FinalFilteredSortedItem(notesState.notesList)
+  const PinnedList = FinalNotesList?.filter((item) => item.isPinned);
+  const UnPinnedList = FinalNotesList?.filter((item) => !item.isPinned);
   function changeColor(e, color) {
     e.stopPropagation();
     setUserData((data) => ({ ...data, bgColor: color }));
@@ -30,11 +37,12 @@ const Home = () =>{
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
       if (
-        toggleColorPallete &&
+        (toggleColorPallete || togglePriorityPallete) &&
         noteInputRef.current &&
         !noteInputRef.current.contains(e.target)
       ) {
         setToggleColorPallette(false);
+        setTogglePriorityPallette(false);
       }
     };
     document.addEventListener("mousedown", checkIfClickedOutside);
@@ -42,14 +50,14 @@ const Home = () =>{
     return () => {
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
-  }, [toggleColorPallete]);
+}, [toggleColorPallete,togglePriorityPallete]);
   return (
         <div class="home__wrapper">
         {notesState.isEditing && <EditNoteCard editNote={notesState.editNote} />}
       <Header />
       <Filter/>
       <div className="main__wrapper">
-        <Sidebar />
+      {togglesidebar ?<Sidebar />:null}
         <div className="main__wrapper-notes">
           <form className="notes__editor" onSubmit={(e)=>submitFormHandler(e)}style={{ backgroundColor: userData.bgColor }}
             ref={noteInputRef} >
@@ -73,6 +81,7 @@ const Home = () =>{
                   palette
                 </span>
                 <span class="material-icons-outlined editor__icons" onClick={()=>setToggleLabelInput(!toggleLabelInput)}>label</span>
+                <span class="material-icons-outlined" onClick={()=>setTogglePriorityPallette(!togglePriorityPallete)}>signal_cellular_alt</span>
               </div>
               <div className="editor__buttons-end">
                 <button className=" btn_sec" type="submit"disabled={userData.title==="" && userData.note==="<p><br></p>"}>
@@ -83,6 +92,7 @@ const Home = () =>{
             {toggleColorPallete ? (
               <ColorPalette changeColor={changeColor} />
             ) : null}
+            {togglePriorityPallete? <PriorityPalette userData={userData} setUserData={setUserData}/>:null}
           </form>
 
           <div class="notes__wrapper">

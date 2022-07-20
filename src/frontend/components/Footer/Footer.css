@@ -16,6 +16,12 @@
 .social__links{
     display: flex;
     /* padding:1rem; */
+    
+}
+
+.social__links a{
+    text-decoration: none;
+    color:var(--primary-color);
 }
 .social__links >*{
     padding: 0 1rem;

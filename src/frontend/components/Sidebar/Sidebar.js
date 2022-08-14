@@ -3,10 +3,13 @@ import { NavLink } from "react-router-dom";
 import { useAuth,useNotes } from "../../context";
 
 const Sidebar = () => {
-const {auth}  =useAuth()
+const {auth}  =useAuth();
+const {togglesidebar,setToggleSidebar} = useNotes();
   return (
     <div className="sidebar">
       <div>
+       <h2 onClick={()=>navigate("/")} className="sidebar_apptitle">METANOTES</h2>  
+        <span class="material-icons-outlined sidebar_close" onClick={()=>setToggleSidebar(!togglesidebar)}>{togglesidebar?"close":"menu"}</span>
         <NavLink
           to="/home"
           className={`sidebar__btn Link_style  ${({ isActive }) =>
